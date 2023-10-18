@@ -15,13 +15,13 @@ const run_arbitrary_command = "cd {0} && {1}";
 
 const main = function() {
 	Promise.resolve() // Init promise chain
-	.then(setup)
-	.then(process_options)
-	.then(run)
-	.catch(function(err) {
-		process.stdin.destroy();
-		console.error(err);
-	});
+		.then(setup)
+		.then(process_options)
+		.then(run)
+		.catch(function(err) {
+			process.stdin.destroy();
+			console.error(err);
+		});
 };
 
 const setup = function() {
@@ -148,7 +148,7 @@ const add_repo = function(folder, repo, verbose) {
 const run_command = function(paramaters) {
 
 	if (program.args.length > 2) {
-		var command = program.args[2] = program.args[2];
+		var command = program.args[2];
 	}
 
 	if (paramaters.options.interactive) {
@@ -160,9 +160,9 @@ const run_command = function(paramaters) {
 			if (command === "q") rl.close();
 			if (command.split("-v").length > 1) var verbose = true;
 			run_command_on_all_repos(paramaters, command, verbose)
-			.then(function() {
-				rl.prompt();
-			});
+				.then(function() {
+					rl.prompt();
+				});
 		}).on("close",function(){
 			process.exit(0);
 		});
